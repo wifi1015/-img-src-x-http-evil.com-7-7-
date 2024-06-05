@@ -1,1 +1,26 @@
+package main
+
+import (
+    "fmt"
+    "gopkg.in/yaml.v2"
+)
+
+type Spec struct {
+    Vuvle string `yaml:"vuvle"`
+    // other fields...
+}
+
+func main() {
+    data := `
 vuvle: "<img src=x> http://evil.com {{7*7}}"
+`
+
+    var spec Spec
+    err := yaml.Unmarshal([]byte(data), &spec)
+    if err != nil {
+        fmt.Printf("error: %v\n", err)
+        return
+    }
+
+    fmt.Printf("Parsed YAML: %+v\n", spec)
+}
